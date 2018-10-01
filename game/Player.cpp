@@ -1391,7 +1391,9 @@ void idPlayer::SetWeapon( int weaponIndex ) {
 	}
 	typeInfo = idClass::GetClass( weaponDef->dict.GetString( "weaponclass", "rvWeapon" ) );
 	if ( !typeInfo || !typeInfo->IsType( rvWeapon::GetClassType() ) ) {
+		gameLocal.Printf("This got tripped");
 		gameLocal.Error( "Invalid weapon class '%s' specified for weapon '%s'", animPrefix.c_str(), weaponDef->dict.GetString ( "weaponclass", "rvWeapon" ) );
+		//Invalid weapon class 'weapon_minelayer' specified for weapon 'rvWeaponMinelayer'
 	}
 	weapon = static_cast<rvWeapon*>( typeInfo->CreateInstance() );
 	weapon->Init( this, weaponDef, currentWeapon, isStrogg );

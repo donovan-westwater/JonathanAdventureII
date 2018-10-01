@@ -2,40 +2,43 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Game">
-      <UniqueIdentifier>{f3ed5096-eb81-4c5c-ae25-ca06e47033dc}</UniqueIdentifier>
+      <UniqueIdentifier>{0028543a-7c7e-4b6c-a2e7-fb46d56b2b55}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\AI">
-      <UniqueIdentifier>{e3bca479-3142-4833-a257-b1949d90541e}</UniqueIdentifier>
+      <UniqueIdentifier>{1853587d-64e4-4d7f-8dfa-1f1b7e7e2cf7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Anim">
-      <UniqueIdentifier>{807c0598-e6c9-4115-9acc-74d7fef5ad5f}</UniqueIdentifier>
+      <UniqueIdentifier>{2bc22d44-0df4-46be-b368-b20e1d75acb6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Client">
-      <UniqueIdentifier>{6e9c91c4-67a3-4ef5-b15a-33861a546552}</UniqueIdentifier>
+      <UniqueIdentifier>{ff562a67-b75a-42b7-bf75-505a3689a992}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\GameSys">
-      <UniqueIdentifier>{45a28529-5593-4ae2-866c-6196f9263833}</UniqueIdentifier>
+      <UniqueIdentifier>{806db538-37f8-47e1-9050-92d16e157960}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Physics">
-      <UniqueIdentifier>{0ad0d090-141f-4dd2-b627-b96a953a5eb2}</UniqueIdentifier>
+      <UniqueIdentifier>{7e9f0ba7-af9b-4788-b400-3abf14d43ad4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Player">
-      <UniqueIdentifier>{e8c1f5b9-e044-478d-913f-fccfd3940cbd}</UniqueIdentifier>
+      <UniqueIdentifier>{9bacd5a7-3e2d-4c88-8b4d-6debc067fba6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Script">
-      <UniqueIdentifier>{5180c1f6-436c-414f-8425-3687e2b20ee6}</UniqueIdentifier>
+      <UniqueIdentifier>{800314dd-c266-47ca-b672-bae983f4f8a5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Vehicle">
-      <UniqueIdentifier>{7e00344b-08cc-4a37-b3a0-56a96ed9bb16}</UniqueIdentifier>
+      <UniqueIdentifier>{a0dd87bb-4c1f-44e5-9c9c-dfe9bd995afe}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Weapon">
-      <UniqueIdentifier>{99f4d4ae-70e0-4327-aeb6-fed5bb18c0c1}</UniqueIdentifier>
+      <UniqueIdentifier>{e158de1e-ff2d-4b7c-9458-17f2e27fb9b6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\MP">
-      <UniqueIdentifier>{33eea194-1384-4c81-98d3-7245a5dc9191}</UniqueIdentifier>
+      <UniqueIdentifier>{5ea0955f-74a6-41ed-8c4d-62eba9388ceb}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\MP\Stats">
-      <UniqueIdentifier>{ad58557d-01a5-4eda-a730-e6f38c08f789}</UniqueIdentifier>
+      <UniqueIdentifier>{b0a0a7a2-6264-40fd-ac3f-80bb765ebd16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Outer Files">
+      <UniqueIdentifier>{5540f738-fbd8-40df-83e7-7818e8b5d537}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -516,6 +519,9 @@
     <ClCompile Include="game\mp\stats\StatWindow.cpp">
       <Filter>Game\MP\Stats</Filter>
     </ClCompile>
+    <ClCompile Include="game\weapon\WeaponMinelayer.cpp">
+      <Filter>Game\Weapon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\Actor.h">
@@ -833,5 +839,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="game\Game.def" />
+    <None Include="..\def\player.def">
+      <Filter>Outer Files</Filter>
+    </None>
+    <None Include="..\def\weapons\minelayer.def">
+      <Filter>Outer Files</Filter>
+    </None>
+    <None Include="..\def\weapons\blaster.def">
+      <Filter>Outer Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
