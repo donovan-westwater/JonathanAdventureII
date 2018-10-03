@@ -78,11 +78,11 @@ entityDef weapon_blaster
 	"joint_world_flash"			"muzzle_flash"
 
 	// Firing properties
-	"chargeTime"				".8"
+	"chargeTime"				".1"  //orginally .8
 	"chargeDelay"				".1"
 	"chargeGlow"				"0 .9"
 	"fireRate"					".15"
-	"spread"					"5" //Oringally 2
+	"spread"					"2" //Oringally 2
 
 //	"def_projectile"			"projectile_blaster"
 	"def_hitscan"				"hitscan_blaster"
@@ -325,7 +325,7 @@ entityDef damage_blaster
 entityDef damage_blaster_charged
 {
 	"inherit"					"damage_blaster"
-	"damage"					"50"
+	"damage"					"500" //oringally 50
 }
 
 entityDef damage_blastersplash_charged
@@ -333,7 +333,7 @@ entityDef damage_blastersplash_charged
 	"inherit"					"damage_blaster"
 	
 	"damage"					"40"
-	"radius"					"1500" //Oringally 500
+	"radius"					"500" //Oringally 500
 	"knockback"					"300" //oringally 30
 	"push"						"2500"
 }

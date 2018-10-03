@@ -46,7 +46,7 @@ entityDef viewStyle_q3_blaster {
 //--------------------------------------------------------------------------------------------------------------------
 // Weapon Defintion
 //-------------------------------------------------------------------------------------------------------------------0
-
+//Invalid weapon class 'weapon_minelayer' specified for weapon 'rvWeaponMinelayer'
 entityDef weapon_minelayer
 {
 	"editor_menu"				"pickup"

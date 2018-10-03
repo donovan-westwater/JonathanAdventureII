@@ -679,7 +679,7 @@ entityDef player_marine
 	"weapon9_best"						"0"
 	"weapon9_cycle"						"1"
 
-	"def_weapon10"						"weapon_minelayer"
+	"def_weapon10"						"weapon_napalmgun"
 	"weapon10_best"						"0"
 	"weapon10_cycle"					"1"	
 
@@ -692,7 +692,7 @@ entityDef player_marine
 	// default weapons
 	// seperate multiple weapons with commas (no spaces).
 	// NOTE: default ammo must be specified explicitly.
-	"weapon"						"weapon_blaster,weapon_minelayer,weapon_machinegun"
+	"weapon"						"weapon_blaster,weapon_machinegun,weapon_shotgun,weapon_hyperblaster,weapon_grenadelauncher,weapon_nailgun,weapon_rocketlauncher,weapon_railgun,weapon_lightinggun,weapon_dmg,weapon_napalmgun"
 	"current_weapon"					"1"
 
 	"pm_jumpheight"						"48"
@@ -728,16 +728,16 @@ entityDef player_marine
 	"minRestoreHealth0"					"20"		// Minimum health when loading a game for skill level 0
 	"minRestoreHealth1"					"10"		// Minimum health when loading a game for skill level 1
 
-	// ammo
-	"ammo_railgun"						"0"
-	"ammo_machinegun"					"-1"
-	"ammo_nailgun"						"0"
+	// ammo all of it was orginally 0 except for blaster and none
+	"ammo_railgun"						"20"
+	"ammo_machinegun"					"20"
+	"ammo_nailgun"						"20"
 	"ammo_blaster"						"-1"
-	"ammo_shotgun"						"0"
-	"ammo_hyperblaster"					"0"
-	"ammo_rocketlauncher"					"0"
-	"ammo_grenadelauncher"					"0"
-	"ammo_lightninggun"					"0"
+	"ammo_shotgun"						"20"
+	"ammo_hyperblaster"					"20"
+	"ammo_rocketlauncher"					"20"
+	"ammo_grenadelauncher"					"20"
+	"ammo_lightninggun"					"20"
 	"ammo_none"						"-1"
 
 	"max_ammo_blaster"					"-1"
