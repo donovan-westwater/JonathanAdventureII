@@ -91,7 +91,7 @@ entityDef weapon_hyperblaster
 	"ammoType"					"ammo_hyperblaster"
 	"inv_start_ammo_hyperblaster"		"60"
 	"ammoRegenStep"				"5"
-	"ammoRegenTime"				"1500"
+	"ammoRegenTime"				"1" //originally 1500
 	"clipSize"					"60"									// large for smooth regen
 	"ammoRequired"				"1"										// ammo is handled in the script file
 	"gui"						"guis/weapons/hyperblaster_ammo.gui"
@@ -273,7 +273,7 @@ entityDef damage_hyperblaster
 	"inherit"					"damage_blaster"
 	"damage"					"14"
 
-	"deathPush"					"100"
+	"deathPush"					"10000" //originally 100
 	"deathPushMin"				"3000 350"
 	"deathPushMax"				"5000 500"
 }
@@ -312,7 +312,7 @@ entityDef projectile_hyperblaster
 	"clipmask_largeshot"		"0"
 	"def_damage"				"damage_hyperblaster"
 	
-	"speed"						"1800"
+	"speed"						"18" //oringally 1800
 	"orient_towards_motion"		"1"
 
 	"fx_impact"			"effects/weapons/hyperblaster/impact_default.fx"

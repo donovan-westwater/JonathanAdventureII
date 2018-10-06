@@ -210,7 +210,10 @@ void rvWeaponRocketLauncher::Think ( void ) {
 rvWeaponRocketLauncher::OnLaunchProjectile
 ================
 */
+
 void rvWeaponRocketLauncher::OnLaunchProjectile ( idProjectile* proj ) {
+	
+
 	rvWeapon::OnLaunchProjectile(proj);
 
 	// Double check that its actually a guided projectile

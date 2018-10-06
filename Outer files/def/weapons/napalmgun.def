@@ -268,7 +268,7 @@ entityDef projectile_napalm
 	"angular_friction"			"0"
 	"contact_friction"			"10"
 	//"bounce"					".65"
-	"gravity"					"1.2"
+	"gravity"					"0.8" //oringally 1.2
 	"fuse"						"2.5"
 								
 	"detonate_on_fuse"			"1"

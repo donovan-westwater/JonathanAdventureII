@@ -671,7 +671,7 @@ entityDef player_marine
 	"weapon7_best"						"0"
 	"weapon7_cycle"						"1"
 
-	"def_weapon8"						"weapon_lightninggun"
+	"def_weapon8"						"weapon_gauntlet" //Orginally weapon lightinggun
 	"weapon8_best"						"1"
 	"weapon8_cycle"						"1"
 
@@ -692,12 +692,13 @@ entityDef player_marine
 	// default weapons
 	// seperate multiple weapons with commas (no spaces).
 	// NOTE: default ammo must be specified explicitly.
-	"weapon"						"weapon_blaster,weapon_machinegun,weapon_shotgun,weapon_hyperblaster,weapon_grenadelauncher,weapon_nailgun,weapon_rocketlauncher,weapon_railgun,weapon_lightinggun,weapon_dmg,weapon_napalmgun"
-	"current_weapon"					"1"
+	// weapons chain: "weapon_blaster,weapon_machinegun,weapon_shotgun,weapon_hyperblaster,weapon_grenadelauncher,weapon_nailgun,weapon_rocketlauncher,weapon_railgun,weapon_lightinggun,weapon_dmg,weapon_napalmgun"
+	"weapon"						"weapon_blaster,weapon_machinegun,weapon_shotgun,weapon_railgun,weapon_grenadelauncher,weapon_hyperblaster,weapon_rocketlauncher,weapon_dmg,weapon_napalmgun,weapon_gauntlet,weapon_nailgun,weapon_lightinggun"
+	"current_weapon"					"6"
 
 	"pm_jumpheight"						"48"
 	"pm_stepsize"						"16"
-	"pm_speed"						"560"  	//DOOM speed was 140
+	"pm_speed"						"160"  	//DOOM speed was 140
 	"pm_walkspeed"						"80"
 	"pm_crouchspeed"					"80"
 	"pm_noclipspeed"					"270"	
@@ -721,10 +722,10 @@ entityDef player_marine
 	"respawn_delay"						"1.7"		// minimum delay for respawning after death
 
 	// stats
-	"health"						"100"
-	"maxhealth"						"100"
-	"armor"							"0"
-	"maxarmor"						"100"
+	"health"						"1000" //oringally 100	
+	"maxhealth"						"1000" // oringally 100
+	"armor"							"10000" //oringally 100		
+	"maxarmor"						"10000" //oringallly 100
 	"minRestoreHealth0"					"20"		// Minimum health when loading a game for skill level 0
 	"minRestoreHealth1"					"10"		// Minimum health when loading a game for skill level 1
 
@@ -739,6 +740,8 @@ entityDef player_marine
 	"ammo_grenadelauncher"					"20"
 	"ammo_lightninggun"					"20"
 	"ammo_none"						"-1"
+	"ammo_dmg"						"50" //oringally non existant
+	"ammo_napalmgun"				"50" //oringally non existant
 
 	"max_ammo_blaster"					"-1"
 	"max_ammo_railgun"					"50"

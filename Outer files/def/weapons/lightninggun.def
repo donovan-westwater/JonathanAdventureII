@@ -267,7 +267,7 @@ model weapon_lightninggun_world
 entityDef hitscan_lightninggun
 {
 	"range"						"10000"
-	"push"						"10000"
+	"push"						"-10000" // oringally 10000
 	
 	"def_damage"				"damage_lightninggun"
 	
@@ -292,8 +292,8 @@ entityDef hitscan_lightninggun_mp
 
 entityDef damage_lightninggun
 {
-	"damage"					"11"
-//	"knockback"					"10"
+	"damage"					"0" //oringally 10
+//	"knockback"					"10" //oringally 10
 	"gib"						"1"
 
 	"filter_electricity"		"1"						// can damage all entities with their damage_filter set to "electricity"

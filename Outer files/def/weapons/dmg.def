@@ -251,14 +251,14 @@ model weapon_dmg_world
 
 entityDef damage_dmg_fly
 {
-	"damage"					"30"
-	"radius"					"200"
+	"damage"					"0" //originally 30
+	"radius"					"20000" //oringally 200
 //	"knockback"					"100"
-	"push"						"-3000"
+	"push"						"-30000" //oringally was -3000
 	"gib"						"1"
 
 	"attackerDamageScale"		"0"							// Dont hurt the player who shot it, but still do effects
-	"attackerPushScale"			"0"							// Dont push the player who shot it
+	"attackerPushScale"			"0"							// Dont push the player who shot it oringally was 0
 
 	"pain"						"stream"
 	"cower"						"1"
@@ -308,14 +308,14 @@ entityDef projectile_dmg
 	"def_radius_damage"			"damage_dmg_fly"
 	"damageRate"				".05"
 																											
-	"speed"					"250"
+	"speed"					"2" //oringally 250
 	
 	"delay_splash"				".45"
 	
 	"linear_friction"			"0"
 	"angular_friction"			"0"
 	"contact_friction"			"10"
-	"fuse"					"10"
+	"fuse"					"100" //oringally 10 
 								
 	"detonate_on_fuse"			"1"
 	"detonate_on_death"			"0"

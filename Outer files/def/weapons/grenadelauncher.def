@@ -74,7 +74,7 @@ entityDef weapon_grenadelauncher
 	"joint_view_barrel"			"barrel"
 	"joint_world_flash"			"muzzle_flash"
 
-	"fireRate"					".8"
+	"fireRate"					"4.8" //oringally .8
 	"spread"					"0"
 	
 	// the direction of projectile launches will be modified by this
@@ -296,7 +296,7 @@ entityDef projectile_grenade
 
 entityDef damage_grenadeDirect 
 {
-	"damage"					"125"
+	"damage"					"500" //oringally 125
 	"gib"						"1"
 
 	"deathPush"					"200"

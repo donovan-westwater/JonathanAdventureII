@@ -84,7 +84,7 @@ entityDef weapon_railgun
   	"joint_view_barrel"			"srocket_muzzle_flash"
 	"joint_world_flash"			"muzzle_flash"
 
-	"fireRate"				"1.6"
+	"fireRate"				"0.1" //oringally 1.6
 	"spread"				"0"
 
 	"inv_weapon"				"weapon_railgun"
@@ -107,7 +107,7 @@ entityDef weapon_railgun
 	"mtr_icon"				"gfx/guis/hud/icons/gun_railgun"
 	
 	"ammoRegenStep"				"1"
-	"ammoRegenTime"				"2750"
+	"ammoRegenTime"				"2" //oringally 2750
 
 	"muzzle_kick_time"			"0.2"
 	"muzzle_kick_maxtime"		"0.6"
@@ -433,9 +433,9 @@ entityDef hitscan_railgun_penetrate
 
 entityDef damage_railgun 
 {
-	"damage"					"125"
-	"push"						"500"
-	"knockback"					"100"
+	"damage"					"500" //oringally 125
+	"push"						"500000" //oringally 500
+	"knockback"					"1000" //oringally 100
 	"gib"						"1"
 
 	"dv_time"					"500"
