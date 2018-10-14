@@ -7,7 +7,7 @@
 #pragma hdrstop
 
 #include "Game_local.h"
-
+#include "gamesys\SysCmds.h"
 #include "ai/AI.h"
 #include "ai/AI_Manager.h"
 #include "Weapon.h"
@@ -234,6 +234,7 @@ void idInventory::Clear( void ) {
 }
 
 /*
+Use this in init with the randomizer
 ==============
 idInventory::GivePowerUp
 ==============
@@ -1490,6 +1491,8 @@ void idPlayer::SetupWeaponEntity( void ) {
 }
 
 /*
+Make the randomizer start here by alling the nessary fucntions for powerups
+Use Inventory.GivePowerUp()
 ==============
 idPlayer::Init
 ==============
@@ -1765,6 +1768,24 @@ void idPlayer::Init( void ) {
 		teamDoublerPending = false;
 		teamDoubler = PlayEffect( "fx_doubler", renderEntity.origin, renderEntity.axis, true );
 	}
+
+	//JohnAdvII: start your coding here?
+	//Use SysCmds to get spawn and map changing code and call both to switch the map I want and spawn my critters
+	//Then set up randomizer and wave system
+	//Figure out how to apply powerups to player and switch out weapons
+	//Firgure out to remove and add weapons
+	int start = gameLocal.GetTime();
+	gameLocal.LoadMap("mp/q4xdm15", 0);
+	char* test = "Mosnter_Breasker";
+	//const idCmdArgs *io = new idCmdArgs(test, false);
+	const idCmdArgs name(test,false);
+	gameLocal.Cmd_Spawn_f(name);
+	inventory.Clear();
+	this->GiveItem("weapon_Blaster");
+
+	
+
+
 }
 
 /*
@@ -4273,6 +4294,7 @@ bool idPlayer::GiveItem( idItem *item ) {
 }
 
 /*
+Powerups with stat changes start here
 ===============
 idPlayer::PowerUpModifier
 ===============
@@ -4376,6 +4398,7 @@ bool idPlayer::PowerUpActive( int powerup ) const {
 }
 
 /*
+just deals with the visual and sound effects of the files, the actual math is not here?
 ===============
 idPlayer::StartPowerUpEffect
 ===============

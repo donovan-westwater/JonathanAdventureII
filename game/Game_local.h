@@ -551,6 +551,7 @@ public:
 	virtual void			SetFriend( int clientNum, bool isFriend );
 	static  void			Cmd_PrintMapEntityNumbers_f( const idCmdArgs& args );
 	static  void			Cmd_PrintSpawnIds_f( const idCmdArgs& args );
+	static  void			Cmd_Spawn_f(const idCmdArgs &args);
 // abahr:
 	virtual int				GetNumGravityAreas() const;
 	virtual const rvGravityArea* GetGravityInfo( int index ) const;

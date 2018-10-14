@@ -537,6 +537,9 @@ void GiveStuffToPlayer( idPlayer* player, const char* name, const char* value )
 }
 
 /*
+//useful commands
+// Can give weapons and powerups
+// most of it is in give stuff to player
 ==================
 Cmd_Give_f
 
@@ -1110,6 +1113,7 @@ void Cmd_Trigger_f( const idCmdArgs &args ) {
 Cmd_Spawn_f
 ===================
 */
+//useful commands
 void Cmd_Spawn_f( const idCmdArgs &args ) {
 #ifndef _MPBETA
 	const char *key, *value;

@@ -267,7 +267,7 @@ public:
 	int						secretAreasDiscovered;
 };
 
-class idPlayer : public idActor {
+class power : public idActor {
 public:
 
  	enum {
