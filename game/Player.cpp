@@ -44,7 +44,8 @@ idCVar net_showPredictionError( "net_showPredictionError", "-1", CVAR_INTEGER | 
 #ifdef _XENON
 bool g_ObjectiveSystemOpen = false;
 #endif
-
+//JohnAdvII variable
+int check = 1;
 // distance between ladder rungs (actually is half that distance, but this sounds better)
 const int LADDER_RUNG_DISTANCE = 32;
 
@@ -1498,8 +1499,9 @@ idPlayer::Init
 ==============
 */
 void idPlayer::Init( void ) {
-	printf("%s", "Evan is still screaming...");
-	gameLocal.Printf("%s", "Please Work");
+	printf("%s", "Evan is still screaming...\n");
+	gameLocal.Printf("%s", "Please Work\n");
+	
 
 	const char			*value;
 	
@@ -1771,7 +1773,7 @@ void idPlayer::Init( void ) {
 		teamDoublerPending = false;
 		teamDoubler = PlayEffect( "fx_doubler", renderEntity.origin, renderEntity.axis, true );
 	}
-
+	/*
 		// JohnAdvII: start your coding here ?
 		//Use SysCmds to get spawn and map changing code and call both to switch the map I want and spawn my critters
 		//Then set up randomizer and wave system
@@ -1787,7 +1789,7 @@ void idPlayer::Init( void ) {
 	gameLocal.Cmd_Spawn_f(name);
 	inventory.Clear();
 	this->GiveItem("weapon_Blaster");
-
+	*/
 	
 
 
@@ -1917,6 +1919,7 @@ void idPlayer::Spawn( void ) {
 		// if we want to display current votes that were started before a player was connected
 		// but are still being voted on, this should check the current vote and update the gui appropriately
 		gameLocal.mpGame.ClearVote( entityNumber );
+		/*
 		//JohnAdvII: start your coding here?
 		//Use SysCmds to get spawn and map changing code and call both to switch the map I want and spawn my critters
 		//Then set up randomizer and wave system
@@ -1932,6 +1935,7 @@ void idPlayer::Spawn( void ) {
 		gameLocal.Cmd_Spawn_f(name);
 		inventory.Clear();
 		this->GiveItem("weapon_Blaster");
+		*/
 	}
 
 	SetLastHitTime( 0, false );
@@ -2102,15 +2106,17 @@ void idPlayer::Spawn( void ) {
 	//Figure out how to apply powerups to player and switch out weapons
 	//Firgure out to remove and add weapons
 	gameLocal.Printf("Evan is screaming really loud...");
-	printf("%s", "Evan is still screaming...");
+	//printf("%s", "Evan is still screaming...");
 	int start = gameLocal.GetTime();
-	gameLocal.LoadMap("mp/q4xdm15", 0);
-	char* test = "Mosnter_Breasker";
+	//gameLocal.LoadMap("maps/mp/q4xdm15.map", 0);
+	char* test = " Monster_Berserker";
+	gameLocal.Printf(test);
 	//const idCmdArgs *io = new idCmdArgs(test, false);
-	const idCmdArgs name(test, false);
+	const idCmdArgs name(test, true); 
+	gameLocal.Printf("Testing Spawn now \n");
 	gameLocal.Cmd_Spawn_f(name);
-	inventory.Clear();
-	this->GiveItem("weapon_Blaster");
+	//inventory.Clear();
+	//gameLocal.GetLocalPlayer()->GiveItem("weapon_Blaster");
 }
 
 /*
@@ -9332,7 +9338,7 @@ void idPlayer::LoadDeferredModel( void ) {
 		}
 	}
 }
-
+//JohnAdvII
 /*
 ==============
 idPlayer::Think
@@ -9433,10 +9439,14 @@ void idPlayer::Think( void ) {
 
 	// if this is the very first frame of the map, set the delta view angles
 	// based on the usercmd angles
+
 	if ( !spawnAnglesSet && ( gameLocal.GameState() != GAMESTATE_STARTUP ) ) {
 		spawnAnglesSet = true;
 		SetViewAngles( spawnAngles );
 		oldFlags = usercmd.flags;
+		gameLocal.Printf("Approaching crash?\n");
+		
+		
 	}
 
 	if ( gameLocal.inCinematic || influenceActive 
@@ -9701,6 +9711,34 @@ void idPlayer::Think( void ) {
 		inBuyZone = false;
 
 	inBuyZonePrev = false;
+	//JohnAdvII
+	if (check == 1){
+		check--;
+		char* test = "spawn Monster_Berserker";
+		gameLocal.Printf("%s\n", test);
+
+		const idCmdArgs *io = new idCmdArgs(test, false);
+
+		const idCmdArgs name(test, true);
+		gameLocal.Printf("%i\n", name.Argc());
+		gameLocal.Printf("%s\n", name.Argv(0));
+
+		gameLocal.Printf("Testing Spawn now \n");
+		gameLocal.Cmd_Spawn_f(name);  
+	}
+
+
+
+
+	//Putting map switching on hold as it isnt part of my deliveribles
+	/*
+	if (check == 1){
+		check--;
+		gameLocal.LoadMap("maps/mp/q4xdm15", 0); //JohnAdvII  "mp/q4xdm15"
+		
+	}
+	*/
+	
 }
 
 /*
@@ -12938,6 +12976,10 @@ idPlayer::Event_LevelTrigger
 */
 void idPlayer::Event_LevelTrigger( void ) {
 	idStr mapName = gameLocal.GetMapName();
+	if (!(mapName == idStr("Firewall"))){
+		//gameLocal.LoadMap("mp/q4xdm15", 0); JohnAdvII
+		gameLocal.Printf("Not the right map\n");
+	}
 	mapName.StripPath();
 	mapName.StripFileExtension();
 	for ( int i = inventory.levelTriggers.Num() - 1; i >= 0; i-- ) {
