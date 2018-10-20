@@ -2105,16 +2105,16 @@ void idPlayer::Spawn( void ) {
 	//Then set up randomizer and wave system
 	//Figure out how to apply powerups to player and switch out weapons
 	//Firgure out to remove and add weapons
-	gameLocal.Printf("Evan is screaming really loud...");
+	//gameLocal.Printf("Evan is screaming really loud...");
 	//printf("%s", "Evan is still screaming...");
-	int start = gameLocal.GetTime();
+//	int start = gameLocal.GetTime();
 	//gameLocal.LoadMap("maps/mp/q4xdm15.map", 0);
-	char* test = " Monster_Berserker";
-	gameLocal.Printf(test);
+	//char* test = " Monster_Berserker";
+	//gameLocal.Printf(test);
 	//const idCmdArgs *io = new idCmdArgs(test, false);
-	const idCmdArgs name(test, true); 
-	gameLocal.Printf("Testing Spawn now \n");
-	gameLocal.Cmd_Spawn_f(name);
+	//const idCmdArgs name(test, true); 
+	//gameLocal.Printf("Testing Spawn now \n");
+	//gameLocal.Cmd_Spawn_f(name);
 	//inventory.Clear();
 	//gameLocal.GetLocalPlayer()->GiveItem("weapon_Blaster");
 }
@@ -9712,7 +9712,9 @@ void idPlayer::Think( void ) {
 
 	inBuyZonePrev = false;
 	//JohnAdvII
-	if (check == 1){
+	int watch = gameLocal.GetTime();
+	//gameLocal.Printf("%i\n", watch);
+	if (check == 1 && watch > 100){
 		check--;
 		char* test = "spawn Monster_Berserker";
 		gameLocal.Printf("%s\n", test);
