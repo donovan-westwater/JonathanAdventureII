@@ -18,7 +18,7 @@ public:
 	int					GetSeed( void ) const;
 
 	int					RandomInt( void );			// random integer in the range [0, MAX_RAND]
-	int					RandomInt( int max );		// random integer in the range [0, max[
+	int					RandomInt( int max );		// random integer in the range [0, max]
 	float				RandomFloat( void );		// random number in the range [0.0f, 1.0f]
 	float				CRandomFloat( void );		// random number in the range [-1.0f, 1.0f]
 

@@ -411,6 +411,7 @@ rvWeaponNailgun::OnLaunchProjectile
 ================
 */
 void rvWeaponNailgun::OnLaunchProjectile ( idProjectile* proj ) {
+	
 	rvWeapon::OnLaunchProjectile(proj);
 
 	idGuidedProjectile* guided;
@@ -418,6 +419,8 @@ void rvWeaponNailgun::OnLaunchProjectile ( idProjectile* proj ) {
 	if ( guided ) {
 		guided->GuideTo ( guideEnt, jointGuideEnt );
 	}
+	
+	
 }
 
 /*

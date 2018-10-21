@@ -47,6 +47,7 @@ bool g_ObjectiveSystemOpen = false;
 //JohnAdvII variables
 int wave = 1;
 int waveNum = 5;
+int end = 10000;
 
 // distance between ladder rungs (actually is half that distance, but this sounds better)
 const int LADDER_RUNG_DISTANCE = 32;
@@ -2122,6 +2123,7 @@ void idPlayer::Spawn( void ) {
 
 	//JohnAdvII
 	wave = 1;
+	end = 10000;
 }
 
 /*
@@ -9719,39 +9721,54 @@ void idPlayer::Think( void ) {
 	//JohnAdvII
 	int watch = gameLocal.GetTime();
 	//gameLocal.Printf("%i\n", watch);
+	
 	if (wave < 6){
-		int end = 10000;
+		
 		if (wave == 1 && watch > end){
-
+			//item and powerup management
+			itemWave();
 			//Monster Management area
 			wave++;
 			gameLocal.Printf("%i", watch);
 			spawnWave();
-			end = end + 2000;
+			end = end + 1200000;
+			gameLocal.Printf("%i\n", end);
 		}
 		else if (wave == 2 && watch > end){
+			//item and powerup management
+			itemWave();
 			//Monster Management area
 			wave++;
 			spawnWave();
-			end = end + 2000;
+			end = end + 1200000;
+			gameLocal.Printf("%i\n", end);
 		}
 		else if (wave == 3 && watch > end){
+			//item and powerup management
+			itemWave();
 			//Monster Management area
 			wave++;
 			spawnWave();
-			end = end + 2000;
+			end = end + 1200000;
+			gameLocal.Printf("%i\n", end);
 		}
 		else if (wave == 4 && watch > end){
+			//item and powerup management
+			itemWave();
 			//Monster Management area
 			wave++;
 			spawnWave();
-			end = end + 2000;
+			end = end + 1200000;
+			gameLocal.Printf("%i\n", end);
 		}
 		else if (wave == 5 && watch > end){
+			//item and powerup management
+			itemWave();
 			//Monster Management area
 			wave++;
 			spawnWave();
-			end = end + 2000;
+			end = end + 1200000;
+			gameLocal.Printf("%i\n", end);
 		}
 		  
 	}
@@ -9770,7 +9787,7 @@ void idPlayer::Think( void ) {
 	
 }
 void idPlayer::spawnWave(){
-	char* test = "spawn Monster_Gunner";
+	char* test = "spawn Monster_Berserker";
 	//gameLocal.Printf("%s\n", test);
 
 	//const idCmdArgs *io = new idCmdArgs(test, false);
@@ -9783,6 +9800,45 @@ void idPlayer::spawnWave(){
 	KillEntities(name, idProjectile::GetClassType());
 	for (int x = 0; x < waveNum; x++){
 		gameLocal.Cmd_Spawn_f(name);
+	}
+
+
+}
+//JohnAdvII
+void idPlayer::itemWave(){
+	inventory.Clear();
+	//num from 0 to 4
+	idRandom numGen = idRandom();
+	int rand = numGen.RandomInt(4);
+	switch (rand){
+		//Minelayer round: Speed + blaster & dmg
+		//figure out how to spawn exspolive barrels (Use listEntities in singleplayer to find name of Barral)
+		char* weapon;
+	case 0:
+	    weapon = "weapon_blaster";
+		GiveItem(weapon);
+		break;
+		//Slow but sturdy: Health + shotgun and Rocket launcher
+	case 1:
+		weapon = "weapon_shotgun";
+		GiveItem(weapon);
+		break;
+		//Flamethrower: Hyperblaster + [Powerup not decided]
+	case 2:
+		weapon = "weapon_hyperblaster";
+		GiveItem(weapon);
+		break;
+		//Stealth ops: Invis + railgun & gauntlet
+	case 3:
+		weapon = "weapon_railgun";
+		GiveItem(weapon);
+		break;
+		//Powerup not decided + nailgun and other left overs go here
+	case 4:
+		weapon = "weapon_machinegun";
+		GiveItem(weapon);
+		break;
+
 	}
 
 

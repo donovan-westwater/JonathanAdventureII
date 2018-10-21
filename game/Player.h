@@ -445,6 +445,7 @@ public:
 
 	//JohnAdv
 	void					spawnWave(void);
+	void					itemWave(void);
 
 
 	void					Init( void );
