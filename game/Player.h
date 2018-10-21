@@ -443,6 +443,10 @@ public:
 	virtual void			Hide( void );
 	virtual void			Show( void );
 
+	//JohnAdv
+	void					spawnWave(void);
+
+
 	void					Init( void );
  	void					PrepareForRestart( void );
  	virtual void			Restart( void );

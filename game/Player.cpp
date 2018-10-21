@@ -44,8 +44,10 @@ idCVar net_showPredictionError( "net_showPredictionError", "-1", CVAR_INTEGER | 
 #ifdef _XENON
 bool g_ObjectiveSystemOpen = false;
 #endif
-//JohnAdvII variable
-int check = 1;
+//JohnAdvII variables
+int wave = 1;
+int waveNum = 5;
+
 // distance between ladder rungs (actually is half that distance, but this sounds better)
 const int LADDER_RUNG_DISTANCE = 32;
 
@@ -235,7 +237,7 @@ void idInventory::Clear( void ) {
 }
 
 /*
-Use this in init with the randomizer
+Use this in init with the randomizer (JohnNote)
 ==============
 idInventory::GivePowerUp
 ==============
@@ -1774,7 +1776,7 @@ void idPlayer::Init( void ) {
 		teamDoubler = PlayEffect( "fx_doubler", renderEntity.origin, renderEntity.axis, true );
 	}
 	/*
-		// JohnAdvII: start your coding here ?
+		// OldWork: start your coding here ?
 		//Use SysCmds to get spawn and map changing code and call both to switch the map I want and spawn my critters
 		//Then set up randomizer and wave system
 		//Figure out how to apply powerups to player and switch out weapons
@@ -1920,7 +1922,7 @@ void idPlayer::Spawn( void ) {
 		// but are still being voted on, this should check the current vote and update the gui appropriately
 		gameLocal.mpGame.ClearVote( entityNumber );
 		/*
-		//JohnAdvII: start your coding here?
+		//OldWork: start your coding here?
 		//Use SysCmds to get spawn and map changing code and call both to switch the map I want and spawn my critters
 		//Then set up randomizer and wave system
 		//Figure out how to apply powerups to player and switch out weapons
@@ -2100,7 +2102,7 @@ void idPlayer::Spawn( void ) {
 
 	itemCosts = static_cast< const idDeclEntityDef * >( declManager->FindType( DECL_ENTITYDEF, "ItemCostConstants", false ) );
 
-	//JohnAdvII: start your coding here?
+	//OldWork: start your coding here?
 	//Use SysCmds to get spawn and map changing code and call both to switch the map I want and spawn my critters
 	//Then set up randomizer and wave system
 	//Figure out how to apply powerups to player and switch out weapons
@@ -2117,6 +2119,9 @@ void idPlayer::Spawn( void ) {
 	//gameLocal.Cmd_Spawn_f(name);
 	//inventory.Clear();
 	//gameLocal.GetLocalPlayer()->GiveItem("weapon_Blaster");
+
+	//JohnAdvII
+	wave = 1;
 }
 
 /*
@@ -9338,7 +9343,7 @@ void idPlayer::LoadDeferredModel( void ) {
 		}
 	}
 }
-//JohnAdvII
+//NOTE: This is where most of my work on the MOD will take place! -Donovan
 /*
 ==============
 idPlayer::Think
@@ -9714,19 +9719,41 @@ void idPlayer::Think( void ) {
 	//JohnAdvII
 	int watch = gameLocal.GetTime();
 	//gameLocal.Printf("%i\n", watch);
-	if (check == 1 && watch > 100){
-		check--;
-		char* test = "spawn Monster_Berserker";
-		gameLocal.Printf("%s\n", test);
+	if (wave < 6){
+		int end = 10000;
+		if (wave == 1 && watch > end){
 
-		const idCmdArgs *io = new idCmdArgs(test, false);
-
-		const idCmdArgs name(test, true);
-		gameLocal.Printf("%i\n", name.Argc());
-		gameLocal.Printf("%s\n", name.Argv(0));
-
-		gameLocal.Printf("Testing Spawn now \n");
-		gameLocal.Cmd_Spawn_f(name);  
+			//Monster Management area
+			wave++;
+			gameLocal.Printf("%i", watch);
+			spawnWave();
+			end = end + 2000;
+		}
+		else if (wave == 2 && watch > end){
+			//Monster Management area
+			wave++;
+			spawnWave();
+			end = end + 2000;
+		}
+		else if (wave == 3 && watch > end){
+			//Monster Management area
+			wave++;
+			spawnWave();
+			end = end + 2000;
+		}
+		else if (wave == 4 && watch > end){
+			//Monster Management area
+			wave++;
+			spawnWave();
+			end = end + 2000;
+		}
+		else if (wave == 5 && watch > end){
+			//Monster Management area
+			wave++;
+			spawnWave();
+			end = end + 2000;
+		}
+		  
 	}
 
 
@@ -9736,13 +9763,30 @@ void idPlayer::Think( void ) {
 	/*
 	if (check == 1){
 		check--;
-		gameLocal.LoadMap("maps/mp/q4xdm15", 0); //JohnAdvII  "mp/q4xdm15"
+		gameLocal.LoadMap("maps/mp/q4xdm15", 0); //OldWork  "mp/q4xdm15"
 		
 	}
 	*/
 	
 }
+void idPlayer::spawnWave(){
+	char* test = "spawn Monster_Gunner";
+	//gameLocal.Printf("%s\n", test);
 
+	//const idCmdArgs *io = new idCmdArgs(test, false);
+
+	const idCmdArgs name(test, true);
+	//gameLocal.Printf("%i\n", name.Argc());
+	//gameLocal.Printf("%s\n", name.Argv(0));
+	gameLocal.Printf("Testing Spawn now \n");
+	KillEntities(name, idAI::GetClassType());
+	KillEntities(name, idProjectile::GetClassType());
+	for (int x = 0; x < waveNum; x++){
+		gameLocal.Cmd_Spawn_f(name);
+	}
+
+
+}
 /*
 =================
 idPlayer::RouteGuiMouse
@@ -12979,7 +13023,7 @@ idPlayer::Event_LevelTrigger
 void idPlayer::Event_LevelTrigger( void ) {
 	idStr mapName = gameLocal.GetMapName();
 	if (!(mapName == idStr("Firewall"))){
-		//gameLocal.LoadMap("mp/q4xdm15", 0); JohnAdvII
+		//gameLocal.LoadMap("mp/q4xdm15", 0); OldWork
 		gameLocal.Printf("Not the right map\n");
 	}
 	mapName.StripPath();

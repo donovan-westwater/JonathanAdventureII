@@ -8408,6 +8408,7 @@ void idGameLocal::Cmd_Spawn_f(const idCmdArgs &args){
 	}
 }
 
+
 /*
 ===============
 idGameLocal::GetDemoHud
