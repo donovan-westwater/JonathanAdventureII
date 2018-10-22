@@ -47,7 +47,7 @@ bool g_ObjectiveSystemOpen = false;
 //JohnAdvII variables
 int wave = 1;
 int waveNum = 5;
-int end = 10000;
+int end = 60000;
 
 // distance between ladder rungs (actually is half that distance, but this sounds better)
 const int LADDER_RUNG_DISTANCE = 32;
@@ -2123,7 +2123,7 @@ void idPlayer::Spawn( void ) {
 
 	//JohnAdvII
 	wave = 1;
-	end = 10000;
+	end = 60000;
 }
 
 /*
@@ -9731,7 +9731,7 @@ void idPlayer::Think( void ) {
 			wave++;
 			gameLocal.Printf("%i", watch);
 			spawnWave();
-			end = end + 1200000;
+			end = end + 300000;
 			gameLocal.Printf("%i\n", end);
 		}
 		else if (wave == 2 && watch > end){
@@ -9740,7 +9740,7 @@ void idPlayer::Think( void ) {
 			//Monster Management area
 			wave++;
 			spawnWave();
-			end = end + 1200000;
+			end = end + 300000;
 			gameLocal.Printf("%i\n", end);
 		}
 		else if (wave == 3 && watch > end){
@@ -9749,7 +9749,7 @@ void idPlayer::Think( void ) {
 			//Monster Management area
 			wave++;
 			spawnWave();
-			end = end + 1200000;
+			end = end + 300000;
 			gameLocal.Printf("%i\n", end);
 		}
 		else if (wave == 4 && watch > end){
@@ -9758,7 +9758,7 @@ void idPlayer::Think( void ) {
 			//Monster Management area
 			wave++;
 			spawnWave();
-			end = end + 1200000;
+			end = end + 300000;
 			gameLocal.Printf("%i\n", end);
 		}
 		else if (wave == 5 && watch > end){
@@ -9767,7 +9767,7 @@ void idPlayer::Think( void ) {
 			//Monster Management area
 			wave++;
 			spawnWave();
-			end = end + 1200000;
+			end = end + 300000;
 			gameLocal.Printf("%i\n", end);
 		}
 		  
@@ -9798,9 +9798,11 @@ void idPlayer::spawnWave(){
 	gameLocal.Printf("Testing Spawn now \n");
 	KillEntities(name, idAI::GetClassType());
 	KillEntities(name, idProjectile::GetClassType());
+	
 	for (int x = 0; x < waveNum; x++){
 		gameLocal.Cmd_Spawn_f(name);
 	}
+	
 
 
 }
