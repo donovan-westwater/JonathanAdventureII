@@ -31,6 +31,8 @@ idDeclManager *				declManager = NULL;
 idAASFileManager *			AASFileManager = NULL;
 idCollisionModelManager *	collisionModelManager = NULL;
 
+
+
 // RAVEN BEGIN
 // jscott: game interface to the fx system
 rvBSEManager *				bse = NULL;
@@ -8365,7 +8367,8 @@ void idGameLocal::Cmd_PrintSpawnIds_f( const idCmdArgs& args ) {
 		}
 	}
 }
-void idGameLocal::Cmd_Spawn_f(const idCmdArgs &args){
+//JohnAdvII
+void idGameLocal::Cmd_Spawn(const idCmdArgs &args){
 
 	const char *key, *value;
 	int			i;
@@ -8389,9 +8392,9 @@ void idGameLocal::Cmd_Spawn_f(const idCmdArgs &args){
 	value = args.Argv(1);
 	dict.Set("classname", value);
 	dict.Set("angle", va("%f", yaw + 180));
-	idRandom numGen = idRandom();
-	int rand = numGen.RandomInt(80);
-	org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * (rand + 80) + idVec3(0, 0, 1);
+	
+	
+	org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * (random.RandomInt(80) + 80) + idVec3(0, 0, 1);
 	dict.Set("origin", org.ToString());
 
 	for (i = 2; i < args.Argc() - 1; i += 2) {

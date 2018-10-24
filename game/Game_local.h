@@ -356,6 +356,9 @@ public:
 
 	idRandom				random;					// random number generator used throughout the game
 
+	//johnAdvII
+	int rNum;
+
 	idProgram				program;				// currently loaded script and data space
 	idThread *				frameCommandThread;
 
@@ -551,7 +554,7 @@ public:
 	virtual void			SetFriend( int clientNum, bool isFriend );
 	static  void			Cmd_PrintMapEntityNumbers_f( const idCmdArgs& args );
 	static  void			Cmd_PrintSpawnIds_f( const idCmdArgs& args );
-	static  void			Cmd_Spawn_f(const idCmdArgs &args);
+			void			Cmd_Spawn(const idCmdArgs &args);
 // abahr:
 	virtual int				GetNumGravityAreas() const;
 	virtual const rvGravityArea* GetGravityInfo( int index ) const;
@@ -922,6 +925,8 @@ private:
 	// server transmits this to clients so they use the right entity layout
 	idList<int>				instancesEntityIndexWatermarks;
 	int						clientInstanceFirstFreeIndex;
+
+	
 
 	idStr					mapFileName;			// name of the map, empty string if no map loaded
 	idMapFile *				mapFile;				// will be NULL during the game unless in-game editing is used

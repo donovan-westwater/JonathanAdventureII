@@ -48,6 +48,7 @@ bool g_ObjectiveSystemOpen = false;
 int wave = 1;
 int waveNum = 5;
 int end = 60000;
+idRandom numGen = idRandom();
 
 // distance between ladder rungs (actually is half that distance, but this sounds better)
 const int LADDER_RUNG_DISTANCE = 32;
@@ -1502,8 +1503,8 @@ idPlayer::Init
 ==============
 */
 void idPlayer::Init( void ) {
-	printf("%s", "Evan is still screaming...\n");
-	gameLocal.Printf("%s", "Please Work\n");
+	//printf("%s", "Evan is still screaming...\n");
+	//gameLocal.Printf("%s", "Please Work\n");
 	
 
 	const char			*value;
@@ -2124,6 +2125,8 @@ void idPlayer::Spawn( void ) {
 	//JohnAdvII
 	wave = 1;
 	end = 60000;
+	numGen = idRandom();
+	numGen.SetSeed(numGen.RandomInt());
 }
 
 /*
@@ -9731,7 +9734,7 @@ void idPlayer::Think( void ) {
 			wave++;
 			gameLocal.Printf("%i", watch);
 			spawnWave();
-			end = end + 300000;
+			end = end + 30000;
 			gameLocal.Printf("%i\n", end);
 		}
 		else if (wave == 2 && watch > end){
@@ -9740,7 +9743,7 @@ void idPlayer::Think( void ) {
 			//Monster Management area
 			wave++;
 			spawnWave();
-			end = end + 300000;
+			end = end + 30000;
 			gameLocal.Printf("%i\n", end);
 		}
 		else if (wave == 3 && watch > end){
@@ -9749,7 +9752,7 @@ void idPlayer::Think( void ) {
 			//Monster Management area
 			wave++;
 			spawnWave();
-			end = end + 300000;
+			end = end + 30000;
 			gameLocal.Printf("%i\n", end);
 		}
 		else if (wave == 4 && watch > end){
@@ -9758,7 +9761,7 @@ void idPlayer::Think( void ) {
 			//Monster Management area
 			wave++;
 			spawnWave();
-			end = end + 300000;
+			end = end + 30000;
 			gameLocal.Printf("%i\n", end);
 		}
 		else if (wave == 5 && watch > end){
@@ -9767,7 +9770,7 @@ void idPlayer::Think( void ) {
 			//Monster Management area
 			wave++;
 			spawnWave();
-			end = end + 300000;
+			end = end + 30000;
 			gameLocal.Printf("%i\n", end);
 		}
 		  
@@ -9800,7 +9803,7 @@ void idPlayer::spawnWave(){
 	KillEntities(name, idProjectile::GetClassType());
 	
 	for (int x = 0; x < waveNum; x++){
-		gameLocal.Cmd_Spawn_f(name);
+		gameLocal.Cmd_Spawn(name);
 	}
 	
 
@@ -9810,7 +9813,7 @@ void idPlayer::spawnWave(){
 void idPlayer::itemWave(){
 	inventory.Clear();
 	//num from 0 to 4
-	idRandom numGen = idRandom();
+	
 	int rand = numGen.RandomInt(4);
 	switch (rand){
 		//Minelayer round: Speed + blaster & dmg
