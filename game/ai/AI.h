@@ -1259,7 +1259,7 @@ ID_INLINE const idVec2& idAI::GetFollowRange ( void ) const {
 ID_INLINE int idAI::GetTravelFlags ( void ) const {
 	return move.travelFlags;
 }
-
+//JohnAdvII
 ID_INLINE bool idAI::IsEnemyVisible ( void ) const {
 	return enemy.ent && enemy.fl.visible;
 }

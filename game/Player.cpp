@@ -48,6 +48,7 @@ bool g_ObjectiveSystemOpen = false;
 int wave = 1;
 int waveNum = 5;
 int end = 60000;
+int seed = 1;
 idRandom numGen = idRandom();
 
 // distance between ladder rungs (actually is half that distance, but this sounds better)
@@ -2126,7 +2127,7 @@ void idPlayer::Spawn( void ) {
 	wave = 1;
 	end = 60000;
 	numGen = idRandom();
-	numGen.SetSeed(numGen.RandomInt());
+	numGen.SetSeed(seed);
 }
 
 /*
@@ -4346,7 +4347,7 @@ bool idPlayer::GiveItem( idItem *item ) {
 }
 
 /*
-Powerups with stat changes start here
+Powerups with stat changes start here johnAdvII
 ===============
 idPlayer::PowerUpModifier
 ===============
@@ -4374,11 +4375,11 @@ float idPlayer::PowerUpModifier( int type ) {
 	if ( PowerUpActive( POWERUP_HASTE ) ) {
 		switch ( type ) {
 			case PMOD_SPEED:	
-				mod *= 1.3f;
+				mod *= 5.3f; //Oringally 1.3f
 				break;
 
 			case PMOD_FIRERATE:
-				mod *= 0.7f;
+				mod *= 0.7f; 
 				break;
 		}
 	}
@@ -4529,11 +4530,13 @@ void idPlayer::StartPowerUpEffect( int powerup ) {
 			hasteEffect = PlayEffect( "fx_haste", GetPhysics()->GetOrigin(), GetPhysics()->GetAxis(), true );
 			break;
 		}
-		
+		//JohnAdvII
 		case POWERUP_INVISIBILITY: {
 			powerUpOverlay = invisibilityOverlay;
 
 			powerUpSkin = declManager->FindSkin( spawnArgs.GetString( "skin_invisibility" ), false );
+			gameLocal.Printf("I was called?\n");
+			fl.hidden = true;
 			break;
 		}
 
@@ -4643,8 +4646,11 @@ void idPlayer::StopPowerUpEffect( int powerup ) {
 			StopEffect( "fx_haste" );
 			break;
 		}
+		//JohnAdvII
 		case POWERUP_INVISIBILITY: {
 			powerUpSkin = NULL;
+			gameLocal.Printf("I should be called!\n");
+			fl.hidden = false;
 			break;
 		}
 		case POWERUP_CTF_STROGGFLAG: {
@@ -4980,7 +4986,7 @@ void idPlayer::UpdatePowerUps( void ) {
 					if( gameLocal.isServer ) {
 						health += healthTic;
 						if ( health > (healthBoundary * 1.1f) ) {
-							health = healthBoundary * 1.1f;
+							health = healthBoundary * 9.1f; //originally 1.1f JohnAdvII
 						}
 					}
 					StartSound ( "snd_powerup_regen", SND_CHANNEL_POWERUP, 0, false, NULL );
@@ -4989,7 +4995,7 @@ void idPlayer::UpdatePowerUps( void ) {
 					if( gameLocal.isServer ) {
 						health += healthTic / 3;
 						if ( health > (healthBoundary * 2) ) {
-							health = healthBoundary * 2;
+							health = healthBoundary * 2;  //originally 2 JohnAdvII
 						}
 					}
 					StartSound ( "snd_powerup_regen", SND_CHANNEL_POWERUP, 0, false, NULL );
@@ -5128,7 +5134,8 @@ void idPlayer::ClearPowerUps( void ) {
    			ClearPowerup( i );
    		}
    	}
-
+	gameLocal.Printf("I was called in itemWave!\n"); //johnadvII
+	fl.hidden = false;
 	inventory.ClearPowerUps();
 }
 
@@ -9812,9 +9819,12 @@ void idPlayer::spawnWave(){
 //JohnAdvII
 void idPlayer::itemWave(){
 	inventory.Clear();
+	ClearPowerUps();
 	//num from 0 to 4
 	
 	int rand = numGen.RandomInt(4);
+	//Powerup notes:
+	//Quad == 0, Regen == 2, Haste == 1, Invis == 3, guard == 8, scount == 10, amour == 7
 	switch (rand){
 		//Minelayer round: Speed + blaster & dmg
 		//figure out how to spawn exspolive barrels (Use listEntities in singleplayer to find name of Barral)
@@ -9822,26 +9832,35 @@ void idPlayer::itemWave(){
 	case 0:
 	    weapon = "weapon_blaster";
 		GiveItem(weapon);
+		GivePowerUp(POWERUP_DOUBLER, SEC2MS(30.0f), false);
 		break;
 		//Slow but sturdy: Health + shotgun and Rocket launcher
 	case 1:
 		weapon = "weapon_shotgun";
 		GiveItem(weapon);
+		weapon = "weapon_rocketlauncher";
+		GiveItem(weapon);
+		GivePowerUp(POWERUP_REGENERATION, SEC2MS(30.0f), false);
 		break;
 		//Flamethrower: Hyperblaster + [Powerup not decided]
 	case 2:
 		weapon = "weapon_hyperblaster";
 		GiveItem(weapon);
+		GivePowerUp(POWERUP_AMMOREGEN, SEC2MS(30.0f), false);
 		break;
 		//Stealth ops: Invis + railgun & gauntlet
 	case 3:
 		weapon = "weapon_railgun";
 		GiveItem(weapon);
+		weapon = "weapon_gauntlet";
+		GiveItem(weapon);
+		GivePowerUp(POWERUP_INVISIBILITY, SEC2MS(30.0f), false);
 		break;
 		//Powerup not decided + nailgun and other left overs go here
 	case 4:
 		weapon = "weapon_machinegun";
 		GiveItem(weapon);
+		GivePowerUp(POWERUP_QUADDAMAGE, SEC2MS(30.0f), false);
 		break;
 
 	}
