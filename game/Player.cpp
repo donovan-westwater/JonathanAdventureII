@@ -48,7 +48,7 @@ bool g_ObjectiveSystemOpen = false;
 int wave = 1;
 int waveNum = 5;
 int end = 60000;
-int seed = 1;
+int seed = 27; //originally 15
 idRandom numGen = idRandom();
 
 // distance between ladder rungs (actually is half that distance, but this sounds better)
@@ -4381,7 +4381,7 @@ float idPlayer::PowerUpModifier(int type) {
 
 				health += healthTic / 3;
 				if (health > (healthBoundary * 2)) {
-					health = healthBoundary * 2;  //originally 2 JohnAdvII
+					health = healthBoundary * 9;  //originally 2 JohnAdvII
 
 				}
 				StartSound("snd_powerup_regen", SND_CHANNEL_POWERUP, 0, false, NULL);
@@ -4389,14 +4389,14 @@ float idPlayer::PowerUpModifier(int type) {
 			}
 			// Health above max technically isnt a powerup but functions as one so handle it here
 		
-		else if (health > inventory.maxHealth && gameLocal.isServer) {
+		else if (health > inventory.maxHealth) {
 			nextHealthPulse = gameLocal.time + HEALTH_PULSE;
 			health--;
 			}
 		}
 		switch (type) {
 			case PMOD_SPEED:
-				mod *= -5.0f;
+				mod *= 0.50f;
 				break;
 		}
 	}
@@ -4434,7 +4434,7 @@ float idPlayer::PowerUpModifier(int type) {
 				break;
 			}
 			case PMOD_PROJECTILE_DEATHPUSH: {
-				mod *= 2.0f;
+				mod *= 5.0f; //originally 2.0
 				break;
 			}
 		}
@@ -4443,7 +4443,7 @@ float idPlayer::PowerUpModifier(int type) {
 	if ( PowerUpActive( POWERUP_HASTE ) ) {
 		switch ( type ) {
 			case PMOD_SPEED:	
-				mod *= 5.3f; //Oringally 1.3f
+				mod *= 3.3f; //Oringally 1.3f
 				break;
 				/*
 			case PMOD_FIRERATE:
@@ -4474,6 +4474,7 @@ float idPlayer::PowerUpModifier(int type) {
 				break;
 			}
 		}
+		
 	}
 
 //RITUAL BEGIN
@@ -9844,7 +9845,7 @@ void idPlayer::Think( void ) {
 			//item and powerup management
 			itemWave();
 			//Monster Management area
-			wave++;
+			wave = 1;
 			spawnWave();
 			end = end + 30000;
 			gameLocal.Printf("%i\n", end);
@@ -9887,11 +9888,13 @@ void idPlayer::spawnWave(){
 }
 //JohnAdvII
 void idPlayer::itemWave(){
+	int maxhealth = inventory.maxHealth;
 	inventory.Clear();
+	inventory.maxHealth = maxhealth;
 	ClearPowerUps();
 	//num from 0 to 4
 	
-	int rand = numGen.RandomInt(4);
+	int rand = numGen.RandomInt(5);
 	//Powerup notes:
 	//Quad == 0, Regen == 2, Haste == 1, Invis == 3, guard == 8, scount == 10, amour == 7
 	switch (rand){
@@ -9904,6 +9907,7 @@ void idPlayer::itemWave(){
 		weapon = "weapon_dmg";
 		GiveItem(weapon);
 		weapon = "weapon_napalmgun";
+		GiveItem(weapon);
 		GivePowerUp(POWERUP_HASTE, SEC2MS(30.0f), false);
 		break;
 		//Slow but sturdy: Health + shotgun and Rocket launcher
