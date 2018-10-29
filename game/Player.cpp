@@ -4352,9 +4352,77 @@ Powerups with stat changes start here johnAdvII
 idPlayer::PowerUpModifier
 ===============
 */
-float idPlayer::PowerUpModifier( int type ) {
+float idPlayer::PowerUpModifier(int type) {
 	float mod = 1.0f;
+	if (PowerUpActive(POWERUP_REGENERATION)){
+		if (health > 0) {
+			int healthBoundary = inventory.maxHealth; // health will regen faster under this value, slower above
+			int healthTic = 15;
 
+			if (PowerUpActive(POWERUP_GUARD)) {
+				// guard max health == 200, so set the boundary back to 100
+				healthBoundary = inventory.maxHealth / 2;
+				if (PowerUpActive(POWERUP_REGENERATION)) {
+					healthTic = 30;
+				}
+			}
+
+			if (health < healthBoundary) {
+				// only actually give health on the server
+				health += healthTic;
+				if (health > (healthBoundary * 1.1f)) {
+					health = healthBoundary * 9.1f; //originally 1.1f JohnAdvII
+				}
+
+				StartSound("snd_powerup_regen", SND_CHANNEL_POWERUP, 0, false, NULL);
+				nextHealthPulse = gameLocal.time + HEALTH_PULSE;
+			}
+			else if (health < (healthBoundary * 2)) {
+
+				health += healthTic / 3;
+				if (health > (healthBoundary * 2)) {
+					health = healthBoundary * 2;  //originally 2 JohnAdvII
+
+				}
+				StartSound("snd_powerup_regen", SND_CHANNEL_POWERUP, 0, false, NULL);
+				nextHealthPulse = gameLocal.time + HEALTH_PULSE;
+			}
+			// Health above max technically isnt a powerup but functions as one so handle it here
+		
+		else if (health > inventory.maxHealth && gameLocal.isServer) {
+			nextHealthPulse = gameLocal.time + HEALTH_PULSE;
+			health--;
+			}
+		}
+		switch (type) {
+			case PMOD_SPEED:
+				mod *= -5.0f;
+				break;
+		}
+	}
+	if (PowerUpActive(POWERUP_AMMOREGEN)) {
+		for (int i = 0; i < MAX_WEAPONS; i++) {
+			if (inventory.weapons & (1 << i)) {
+				int ammoIndex = inventory.AmmoIndexForWeaponIndex(i);
+				int max = inventory.StartingAmmoForWeaponIndex(i);
+
+				// only regen ammo if lower than starting
+				if (gameLocal.time > nextAmmoRegenPulse[ammoIndex] && inventory.ammo[ammoIndex] < max) {
+					int step = inventory.AmmoRegenStepForWeaponIndex(i);
+					int time = inventory.AmmoRegenTimeForWeaponIndex(i);
+
+					if (inventory.ammo[ammoIndex] < max) {
+						inventory.ammo[ammoIndex] += step;
+					}
+					if (inventory.ammo[ammoIndex] >= max) {
+						inventory.ammo[ammoIndex] = max;
+					}
+
+					nextAmmoRegenPulse[ammoIndex] = gameLocal.time + time;
+				}
+			}
+		}
+	}
 	if ( PowerUpActive( POWERUP_QUADDAMAGE ) ) {
 		switch( type ) {
 			case PMOD_PROJECTILE_DAMAGE: {
@@ -4377,10 +4445,11 @@ float idPlayer::PowerUpModifier( int type ) {
 			case PMOD_SPEED:	
 				mod *= 5.3f; //Oringally 1.3f
 				break;
-
+				/*
 			case PMOD_FIRERATE:
 				mod *= 0.7f; 
 				break;
+				*/
 		}
 	}
 
@@ -9832,7 +9901,10 @@ void idPlayer::itemWave(){
 	case 0:
 	    weapon = "weapon_blaster";
 		GiveItem(weapon);
-		GivePowerUp(POWERUP_DOUBLER, SEC2MS(30.0f), false);
+		weapon = "weapon_dmg";
+		GiveItem(weapon);
+		weapon = "weapon_napalmgun";
+		GivePowerUp(POWERUP_HASTE, SEC2MS(30.0f), false);
 		break;
 		//Slow but sturdy: Health + shotgun and Rocket launcher
 	case 1:
@@ -9859,6 +9931,8 @@ void idPlayer::itemWave(){
 		//Powerup not decided + nailgun and other left overs go here
 	case 4:
 		weapon = "weapon_machinegun";
+		GiveItem(weapon);
+		weapon = "weapon_nailgun";
 		GiveItem(weapon);
 		GivePowerUp(POWERUP_QUADDAMAGE, SEC2MS(30.0f), false);
 		break;
