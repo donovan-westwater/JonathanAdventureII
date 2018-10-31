@@ -722,8 +722,8 @@ entityDef player_marine
 	"respawn_delay"						"1.7"		// minimum delay for respawning after death
 
 	// stats
-	"health"						"1000" //oringally 100	
-	"maxhealth"						"1000" // oringally 100
+	"health"						"500" //oringally 100	
+	"maxhealth"						"500" // oringally 100
 	"armor"							"10000" //oringally 100		
 	"maxarmor"						"10000" //oringallly 100
 	"minRestoreHealth0"					"20"		// Minimum health when loading a game for skill level 0

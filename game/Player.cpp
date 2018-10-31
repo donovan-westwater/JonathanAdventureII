@@ -3480,7 +3480,11 @@ void idPlayer::UpdateHudStats( idUserInterface *_hud ) {
 		_hud->SetStateFloat	( "player_armorpct", idMath::ClampFloat ( 0.0f, 1.0f, (float)inventory.armor / (float)inventory.maxarmor ) );
 		_hud->HandleNamedEvent ( "updateArmor" );
 	}
-	
+	//JohnAdv
+	temp = _hud->State().GetInt("wave","-1");
+	if (temp != wave){
+		_hud->SetStateInt("wave", temp == -1 ? 0 : wave-1);
+	}
 	// Boss bar
 	if ( _hud->State().GetInt ( "boss_health", "-1" ) != (bossEnemy ? bossEnemy->health : -1) ) {
 		if ( !bossEnemy || bossEnemy->health <= 0 ) {

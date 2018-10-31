@@ -251,7 +251,7 @@ model weapon_dmg_world
 
 entityDef damage_dmg_fly
 {
-	"damage"					"0" //originally 30
+	"damage"					"30" //originally 30
 	"radius"					"20000" //oringally 200
 //	"knockback"					"100"
 	"push"						"-30000" //oringally was -3000

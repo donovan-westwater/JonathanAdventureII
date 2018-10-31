@@ -89,8 +89,8 @@ entityDef weapon_hyperblaster
 
 	"weaponname"				"HyperBlaster"
 	"ammoType"					"ammo_hyperblaster"
-	"inv_start_ammo_hyperblaster"		"60"
-	"ammoRegenStep"				"5"
+	"inv_start_ammo_hyperblaster"		"600"
+	"ammoRegenStep"				"99" //oringally 5
 	"ammoRegenTime"				"1" //originally 1500
 	"clipSize"					"60"									// large for smooth regen
 	"ammoRequired"				"1"										// ammo is handled in the script file
@@ -271,7 +271,7 @@ entityDef weaponmod_hyperblaster_bounce2
 entityDef damage_hyperblaster
 {
 	"inherit"					"damage_blaster"
-	"damage"					"14"
+	"damage"					"50" //oringally 14
 
 	"deathPush"					"10000" //originally 100
 	"deathPushMin"				"3000 350"
@@ -286,7 +286,7 @@ entityDef damage_hyperblaster_mp
 
 entityDef damage_hyperblaster_splash
 {
-	"damage"					"10"
+	"damage"					"50" //oringally 10
 	"radius"					"35"
 	"knockback"					"5"
 	"push"						"0"

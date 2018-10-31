@@ -1,1 +1,10 @@
 Altered blaster to act as a minelayer
+Rocket launcher and grenade laucnher and shotgun fire much slower
+dmg acts as black hole placer
+napalmgun has a longer range
+gauntllet deals a bit less damage and attack speed but as uped range 
+machinegun has silly looking model with high deathpush
+railgun deals way more damage
+nailgun deals more damge
+
+ 
