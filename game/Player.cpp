@@ -48,7 +48,7 @@ bool g_ObjectiveSystemOpen = false;
 int wave = 1;
 int waveNum = 5;
 int end = 60000;
-int seed = 27; //originally 15
+int seed = 15; //originally 15
 idRandom numGen = idRandom();
 
 // distance between ladder rungs (actually is half that distance, but this sounds better)
@@ -4421,6 +4421,11 @@ float idPlayer::PowerUpModifier(int type) {
 					nextAmmoRegenPulse[ammoIndex] = gameLocal.time + time;
 				}
 			}
+		}
+		switch (type) {
+			case PMOD_SPEED:
+				mod *=  1.75f;
+				break;
 		}
 	}
 	if ( PowerUpActive( POWERUP_QUADDAMAGE ) ) {
